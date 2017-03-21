@@ -1,0 +1,14 @@
+version: "2"
+
+services: 
+  cli:
+    image: ${REGISTRY_URL}/${PROJECT_NAME}
+    volumes: 
+    - ./scripts:/opt/pmis/cli/share/scripts
+    environment:
+    - DB_URL
+    - DB_PASSWORD
+    - DB_USERNAME
+    - ES_HOST
+    - ES_PORT
+    - ES_CLUSTER
