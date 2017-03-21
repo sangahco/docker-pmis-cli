@@ -24,7 +24,7 @@ echo "URL: $DB_URL"
 echo "SCHEMA: $DB_USERNAME"
 read -p "Keep executing the script (실행 계속하시갰습니까)? [n/y]" confirm
 
-if [ $confirm != "y" ]; then exit 1; fi
+if [ "$confirm" != "y" ]; then exit 1; fi
 
 export JAVA_OPTS="$JAVA_OPTS -Duser.timezone=GMT"
 
