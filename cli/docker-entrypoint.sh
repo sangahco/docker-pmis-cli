@@ -2,29 +2,30 @@
 
 set -e
 
-if [ -z $DB_URL ]; then
-    read -p "DB Uri: " var1
-    export DB_URL=$var1
-fi
+setenv() {
+    read -p "DB URI (\"$DB_URL\"): " var1
+    export DB_URL=${var1:-$DB_URL}
 
-if [ -z $DB_USERNAME ]; then
-    read -p "DB Username: " var1
-    export DB_USERNAME=$var1
-fi
-
-if [ -z $DB_PASSWORD ]; then
+    read -p "DB Username (\"$DB_USERNAME\"): " var1
+    export DB_USERNAME=${var1:-$DB_USERNAME}
+    
     read -sp "DB Password: " var1
-    export DB_PASSWORD=$var1
-fi
+    export DB_PASSWORD=${var1:-$DB_PASSWORD}
 
-echo
-echo "======================================================"
-echo "DB Information:"
-echo "URL: $DB_URL"
-echo "SCHEMA: $DB_USERNAME"
-read -p "Keep executing the script (실행 계속하시갰습니까) [n/y]? " confirm
+    echo
+    echo "======================================================"
+    echo "The script will run with the following db connection"
+    echo "### db url:      $DB_URL"
+    echo "### db schema:   $DB_USERNAME"
+    read -p "To run type [y], to edit db information type [e], to quit leave blank? " confirm
 
-if [ "$confirm" != "y" ]; then exit 1; fi
+    if [ "$confirm" == "e" ]; then 
+        setenv;
+    elif [ "$confirm" != "y" ] && [ "$confirm" != "Y" ]; then
+        exit 1;
+    fi
+}
+setenv
 
 export JAVA_OPTS="$JAVA_OPTS -Duser.timezone=GMT"
 
