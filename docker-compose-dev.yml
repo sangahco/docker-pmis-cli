@@ -12,3 +12,4 @@ services:
     - ES_HOST
     - ES_PORT
     - ES_CLUSTER
+    - "JAVA_OPTS=-Delasticsearch.user=${ES_USER} -Delasticsearch.password=${ES_PASSWORD}"
