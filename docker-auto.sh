@@ -2,6 +2,8 @@
 
 set -e
 
+DOCKER_COMPOSE_VERSION="1.11.2"
+CONF_ARG="-f docker-compose.yml"
 SCRIPT_BASE_PATH=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 cd "$SCRIPT_BASE_PATH"
 
@@ -11,7 +13,7 @@ if [ -z "$REGISTRY_URL" ]; then
 fi
 
 if ! command -v docker-compose >/dev/null 2>&1; then
-    sudo curl -L "https://github.com/docker/compose/releases/download/1.10.0/docker-compose-$(uname -s)-$(uname -m)" \
+    sudo curl -L "https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE_VERSION/docker-compose-$(uname -s)-$(uname -m)" \
     -o /usr/local/bin/docker-compose
     sudo chmod +x /usr/local/bin/docker-compose
 fi
@@ -29,8 +31,6 @@ echo
 echo "Commands:"
 echo "  run             Start the services"
 }
-
-CONF_ARG="-f docker-compose.yml"
 
 if [ $# -eq 0 ]; then
     usage
