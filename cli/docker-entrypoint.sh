@@ -19,7 +19,7 @@ setenv() {
     echo "### db schema:   $DB_USERNAME"
     read -p "To run type [run], to edit db information type [e], to quit just press [ENTER]? " confirm
 
-    if [ "$confirm" == "e" || "$confirm" == "E" ]; then 
+    if [ "$confirm" == "e" ] || [ "$confirm" == "E" ]; then 
         setenv;
     elif [ "$confirm" != "run" ] && [ "$confirm" != "RUN" ]; then
         exit 1;
