@@ -5,6 +5,9 @@ services:
     image: ${REGISTRY_URL}/${PROJECT_NAME}
     volumes: 
     - ./scripts:/opt/pmis/cli/share/scripts
+    - ${LOG_PATH}/pmis:/var/log/pmis
+    - ${EDMS_PATH}:/edms
+    - ${DATA_PATH}:/data
     environment:
     - DB_URL
     - DB_PASSWORD

@@ -17,15 +17,18 @@ setenv() {
     echo "The script will run with the following db connection"
     echo "### db url:      $DB_URL"
     echo "### db schema:   $DB_USERNAME"
-    read -p "To run type [y], to edit db information type [e], to quit leave blank? " confirm
+    read -p "To run type [run], to edit db information type [e], to quit just press [ENTER]? " confirm
 
-    if [ "$confirm" == "e" ]; then 
+    if [ "$confirm" == "e" || "$confirm" == "E" ]; then 
         setenv;
-    elif [ "$confirm" != "y" ] && [ "$confirm" != "Y" ]; then
+    elif [ "$confirm" != "run" ] && [ "$confirm" != "RUN" ]; then
         exit 1;
     fi
 }
-setenv
+
+if [ "$NON_INTERACTIVE" != "true" ]; then
+    setenv
+fi
 
 export JAVA_OPTS="$JAVA_OPTS -Duser.timezone=GMT"
 
@@ -43,4 +46,5 @@ if [ ! -f "$SCRIPT_FILE_NAME" ]; then
 fi
 shift
 echo "Executing script $SCRIPT_FILE_NAME"
+echo "with arguments: $0"
 exec launch.sh $SCRIPT_FILE_NAME "$@"

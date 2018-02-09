@@ -7,7 +7,7 @@ ARG archive=stnd_pmis-cli.tar
 
 COPY ./system_config_ko.properties /tmp/conf/
 COPY ./$archive $CLI_HOME/
-RUN set -e && \
+RUN set -ex && \
     apt-get update && apt-get -y install \
       ant \
       ant-optional && \
