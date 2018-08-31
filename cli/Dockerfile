@@ -1,8 +1,9 @@
 FROM openjdk:8-jre
 
-ENV CLI_HOME=/opt/pmis/cli
-ENV CLI_SHARE_SCRIPT_HOME=share/scripts
-ENV PATH=$CLI_HOME:$PATH
+ENV CLI_HOME=/opt/pmis/cli \
+    CLI_SHARE_SCRIPT_HOME=share/scripts \
+    PATH=$CLI_HOME:$PATH
+
 ARG archive=stnd_pmis-cli.tar
 
 COPY ./system_config_ko.properties /tmp/conf/
