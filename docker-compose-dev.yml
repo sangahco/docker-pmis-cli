@@ -5,6 +5,7 @@ services:
     build: cli
     volumes: 
     - ./scripts:/opt/pmis/cli/share/scripts
+    - ./cli/pmis.properties:/opt/pmis/cli/WEB-INF/classes/system_config_ko.properties
     - ${LOG_PATH}/pmis:/var/log/pmis
     - ${EDMS_PATH}:/edms
     - ${DATA_PATH}:/data
@@ -12,7 +13,5 @@ services:
     - DB_URL
     - DB_PASSWORD
     - DB_USERNAME
-    - ES_HOST
-    - ES_PORT
     - NON_INTERACTIVE
-    - "JAVA_OPTS=-Delasticsearch.user=${ES_USER} -Delasticsearch.password=${ES_PASSWORD} -Delasticsearch.ssl.enabled=${ES_SSL_ENABLED}"
+    - JAVA_OPTS

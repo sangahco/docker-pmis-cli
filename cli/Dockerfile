@@ -6,7 +6,7 @@ ENV CLI_HOME=/opt/pmis/cli \
 
 ARG archive=stnd_pmis-cli.tar
 
-COPY ./system_config_ko.properties /tmp/conf/
+#COPY ./system_config_ko.properties /tmp/conf/
 COPY ./$archive $CLI_HOME/
 RUN set -ex && \
     apt-get update && apt-get -y install \
@@ -16,7 +16,6 @@ RUN set -ex && \
     rm -rf /var/lib/apt/lists/* && \
     cd $CLI_HOME && \
     tar -xf $archive && rm $archive && \
-    cp -a /tmp/conf/* $CLI_HOME/WEB-INF/classes && \
     mkdir -p $CLI_SHARE_SCRIPT_HOME && \
     rm -rf /tmp/*
 
